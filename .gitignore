@@ -17,6 +17,7 @@ bin/
 
 # intellij IDEA
 .idea/
+/.idea/
 /idea/
 *.ipr
 *.iml
