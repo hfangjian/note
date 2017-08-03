@@ -153,8 +153,8 @@ CREATE TABLE `nissan_partdesc` (
 CREATE TABLE `nissan_partimage` (
   `model_code` varchar(10) DEFAULT NULL COMMENT '[车型代码]',
   `subgroup` smallint(6) DEFAULT NULL COMMENT '[子组]',
-  `imgname` varchar(64) DEFAULT NULL COMMENT '[图片文件名]',
   `partcode` varchar(16) DEFAULT NULL COMMENT '[零件代码]',
+  `imgname` varchar(64) DEFAULT NULL COMMENT '[图片文件名]',
   `coord_y` smallint(6) DEFAULT NULL COMMENT '[y坐标]',
   `coord_x` smallint(6) DEFAULT NULL COMMENT '[x坐标]',
   `pagecode` varchar(8) DEFAULT NULL COMMENT '[页代码]'
@@ -194,6 +194,9 @@ CREATE TABLE `nissan_partdetail` (
   `color` varchar(10) DEFAULT NULL COMMENT '颜色',
   `spec` char(2) DEFAULT NULL COMMENT '规格'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+--表索引
+ALTER TABLE nissan_partdetail ADD INDEX modelcode_partcode (model_code(5),partcode(8));
 ```  
 
 ### 7. 碰撞数据表
@@ -262,8 +265,8 @@ CREATE TABLE `nissan_maindesc` (
 #### 建表语句：  
 ```sql
 CREATE TABLE `nissan_mainimage` (
+  `maingroup` char(1) DEFAULT NULL COMMENT '主组',
   `imgname` varchar(32) DEFAULT NULL COMMENT '图片名称',
-  `maincode` char(1) DEFAULT NULL COMMENT '主组',
   `coord_y` smallint(6) DEFAULT NULL COMMENT 'Y坐标',
   `coord_x` smallint(6) DEFAULT NULL COMMENT 'X坐标'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
