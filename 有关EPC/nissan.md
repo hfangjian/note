@@ -153,8 +153,8 @@ CREATE TABLE `nissan_partdesc` (
 CREATE TABLE `nissan_partimage` (
   `model_code` varchar(10) DEFAULT NULL COMMENT '[车型代码]',
   `subgroup` smallint(6) DEFAULT NULL COMMENT '[子组]',
-  `imgname` varchar(64) DEFAULT NULL COMMENT '[图片文件名]',
   `partcode` varchar(16) DEFAULT NULL COMMENT '[零件代码]',
+  `imgname` varchar(64) DEFAULT NULL COMMENT '[图片文件名]',
   `coord_y` smallint(6) DEFAULT NULL COMMENT '[y坐标]',
   `coord_x` smallint(6) DEFAULT NULL COMMENT '[x坐标]',
   `pagecode` varchar(8) DEFAULT NULL COMMENT '[页代码]'
@@ -194,6 +194,9 @@ CREATE TABLE `nissan_partdetail` (
   `color` varchar(10) DEFAULT NULL COMMENT '颜色',
   `spec` char(2) DEFAULT NULL COMMENT '规格'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
+
+--表索引
+ALTER TABLE nissan_partdetail ADD INDEX modelcode_partcode (model_code(5),partcode(8));
 ```  
 
 ### 7. 碰撞数据表
@@ -252,7 +255,7 @@ CREATE TABLE `nissan_maindesc` (
 |序号| 列名            | 类型         | 备注    |
 |:--:|:--------------:|:------------:|:------- |
 |1   |imgname         |varchar(32)   |图片名称 |
-|2   |maincode        |char(1)       |主组 |
+|2   |maingroup       |char(1)       |主组 |
 |3   |coord_y         |smallint(6)   |Y坐标|
 |4   |coord_x         |smallint(6)   |X坐标|
 
@@ -262,8 +265,8 @@ CREATE TABLE `nissan_maindesc` (
 #### 建表语句：  
 ```sql
 CREATE TABLE `nissan_mainimage` (
+  `maingroup` char(1) DEFAULT NULL COMMENT '主组',
   `imgname` varchar(32) DEFAULT NULL COMMENT '图片名称',
-  `maincode` char(1) DEFAULT NULL COMMENT '主组',
   `coord_y` smallint(6) DEFAULT NULL COMMENT 'Y坐标',
   `coord_x` smallint(6) DEFAULT NULL COMMENT 'X坐标'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -276,8 +279,8 @@ CREATE TABLE `nissan_mainimage` (
 |序号| 列名            | 类型         | 备注    |
 |:--:|:--------------:|:------------:|:------- |
 |1   |model_code      |varchar(10)   |车型代码 |
-|2   |maincode        |char(1)       |主组 |
-|3   |subcode         |smallint(6)   |子组|
+|2   |maingroup       |char(1)       |主组 |
+|3   |subgroup        |smallint(6)   |子组|
 |4   |subdesc         |varchar(255)  |子组描述|
 
 #### 表样：  
@@ -287,8 +290,8 @@ CREATE TABLE `nissan_mainimage` (
 ```sql
 CREATE TABLE `nissan_subdesc` (
   `model_code` varchar(10) NOT NULL COMMENT '车型代码',
-  `maincode` char(1) NOT NULL COMMENT '主组',
-  `subcode` smallint(6) NOT NULL COMMENT '子组',
+  `maingroup` char(1) NOT NULL COMMENT '主组',
+  `subgroup` smallint(6) NOT NULL COMMENT '子组',
   `subdesc` varchar(255) DEFAULT NULL COMMENT '子组描述',
   PRIMARY KEY (`model_code`,`maincode`,`subcode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -301,8 +304,8 @@ CREATE TABLE `nissan_subdesc` (
 |序号| 列名            | 类型         | 备注    |
 |:--:|:--------------:|:------------:|:------- |
 |1   |imgname         |varchar(32)   |图片名称 |
-|2   |maincode        |char(1)       |主组 |
-|3   |subcode         |smallint(6)   |子组|
+|2   |maingroup       |char(1)       |主组 |
+|3   |subgroup        |smallint(6)   |子组|
 |3   |coord_y         |smallint(6)   |Y坐标|
 |4   |coord_x         |smallint(6)   |X坐标|
 
@@ -313,8 +316,8 @@ CREATE TABLE `nissan_subdesc` (
 ```sql  
 CREATE TABLE `nissan_subimage` (
   `imgname` varchar(32) DEFAULT NULL COMMENT '图片名称',
-  `maincode` char(1) DEFAULT NULL COMMENT '主组',
-  `subcode` smallint(6) DEFAULT NULL COMMENT '子组',
+  `maingroup` char(1) DEFAULT NULL COMMENT '主组',
+  `subgroup` smallint(6) DEFAULT NULL COMMENT '子组',
   `coord_y` smallint(6) DEFAULT NULL COMMENT 'Y坐标',
   `coord_x` smallint(6) DEFAULT NULL COMMENT 'X坐标'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
@@ -327,7 +330,7 @@ CREATE TABLE `nissan_subimage` (
 |序号| 列名            | 类型         | 备注    |
 |:--:|:--------------:|:------------:|:------- |
 |1   |model_code      |varchar(10)   |车型代码 |
-|2   |subcode         |smallint(6)   |子组 |
+|2   |subgroup         |smallint(6)   |子组 |
 |3   |subpage         |char(5)       |子组页码|
 |3   |apply_car       |varchar(128)  |子组应用车型|
 |4   |apply_spec      |varchar(128)  |子组应用规格|
@@ -341,7 +344,7 @@ CREATE TABLE `nissan_subimage` (
 ```sql
 CREATE TABLE `nissan_subapply` (
   `model_code` varchar(10) DEFAULT NULL COMMENT '车型代码',
-  `subcode` smallint(6) DEFAULT NULL COMMENT '子组',
+  `subgroup` smallint(6) DEFAULT NULL COMMENT '子组',
   `subpage` char(5) DEFAULT NULL COMMENT '子组页码',
   `apply_car` varchar(128) DEFAULT NULL COMMENT '子组应用车型',
   `apply_spec` varchar(128) DEFAULT NULL COMMENT '子组应用规格',
