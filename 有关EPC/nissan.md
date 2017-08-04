@@ -330,7 +330,7 @@ CREATE TABLE `nissan_subimage` (
 |序号| 列名            | 类型         | 备注    |
 |:--:|:--------------:|:------------:|:------- |
 |1   |model_code      |varchar(10)   |车型代码 |
-|2   |subgroup         |smallint(6)   |子组 |
+|2   |subgroup        |smallint(6)   |子组 |
 |3   |subpage         |char(5)       |子组页码|
 |3   |apply_car       |varchar(128)  |子组应用车型|
 |4   |apply_spec      |varchar(128)  |子组应用规格|
