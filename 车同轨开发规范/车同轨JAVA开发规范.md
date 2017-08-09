@@ -221,7 +221,7 @@ if ((file.open(fileName, "w") != null) && (...) || (...)) {
  ### （1）建表规约  
  1. **【强制】** 表达是与否概念的字段，必须使用is_xxx的方式命名，数据类型是unsigned tinyint（ 1表示是，0表示否）。  
  说明：任何字段如果为非负数，必须是unsigned。  
- <font color=#00ff00>正例</font>： 表达逻辑删除的字段名 is_deleted，1表示删除， 0表示未删除。 表
+ <font color=#00ff00>正例</font>： 表达逻辑删除的字段名 is_deleted，1表示删除， 0表示未删除。 
 
  2. **【强制】** 表名、字段名<font color=#f45b41>必须使用小写字母或数字</font>，禁止出现数字开头，禁止两个下划线中间只出现数字。<font color=#f45b41>数据库字段名的修改代价很大，所以字段名称需要慎重考虑</font>。  
  <font color=#00ff00>正例</font>：getter_admin，task_config，level3_name  
