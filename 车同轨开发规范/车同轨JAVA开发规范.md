@@ -235,13 +235,13 @@ if ((file.open(fileName, "w") != null) && (...) || (...)) {
  5. **【强制】** 主键索引名为pk_字段名；唯一索引名为uk_字段名；普通索引名则为idx_字段名。  
  说明：pk_ 即primary key；uk_ 即 unique key；idx_ 即index的简称。  
 
- 6. **【强制】** 小数类型为decimal，禁止使用float和double。
+ 6. **【强制】** 小数类型为decimal，禁止使用float和double。  
 说明：float和double在存储的时候，存在精度损失的问题，很可能在值的比较时，得到不正确的结果。如果存储的数据范围超过decimal的范围，建议将数据拆成整数和小数分开存储。
 
  7. **【强制】** 如果存储的字符串长度几乎相等，使用char定长字符串类型。  
 
  8. **【强制】** 表必备三字段：id, create_time, update_time。  
-说明：其中id必为主键，类型为unsigned bigint、单表时自增、步长为1。gmt_create, gmt_modified的类型均为date_time类型。
+说明：其中id必为主键，类型为unsigned bigint、单表时自增、步长为1。create_time, update_time的类型均为date_time类型。
 
  9. **【推荐】** 表的命名最好是加上“业务名称_表的作用”。  
  <font color=#00ff00>正例</font>：tiger_task / tiger_reader / mpp_config  
@@ -249,8 +249,6 @@ if ((file.open(fileName, "w") != null) && (...) || (...)) {
  10. **【推荐】** 库名与应用名称尽量一致。  
 
  11. **【推荐】** 如果修改字段含义或对字段表示的状态追加时，需要及时更新字段注释。
- <font color=#00ff00>正例</font>：
- <font color=#ff0033>反例</font>：
 
  12. **【推荐】** 字段允许适当冗余，以提高查询性能，但必须考虑数据一致。冗余字段应遵循：  
  1）不是频繁修改的字段。  
@@ -270,7 +268,7 @@ if ((file.open(fileName, "w") != null) && (...) || (...)) {
     |太阳|约50亿年|unsigned tinyint|无符号值：0到约10的19次方| -->
 
 ### （2）SQL语句
- 1. **【强制】** 不要使用count(列名)或count(常量)来替代count(*)，count(*)是SQL92定义的标准统计行数的语法，跟数据库无关，跟NULL和非NULL无关。  
+ 1. **【强制】** 不要使用count(列名)或count(常量)来替代count(\*)，count(\*)是SQL92定义的标准统计行数的语法，跟数据库无关，跟NULL和非NULL无关。  
 说明：count(*)会统计值为NULL的行，而count(列名)不会统计此列为NULL值的行。  
 
  2. **【强制】** count(distinct col) 计算该列除NULL之外的不重复行数，注意 count(distinct col1, col2) 如果其中一列全为NULL，那么即使另一列有不同的值，也返回为0。
