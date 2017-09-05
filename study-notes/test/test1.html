@@ -18,13 +18,68 @@
       <dt>cccvas</dt>
       <dd>问vwbwb 恶女规格</dd>
     </dl>
+
+    <button id="aaa">dks</button>
+
+
+
+
+    	<!-- 模态框 -->
+      <div id="good-model" class="modal fade"  role="dialog"
+      aria-labelledby="myModalLabel" aria-="true" data-backdrop="static">
+      <div class="modal-dialog" style="width: 700px">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"
+              aria-="true"></button>
+            <h3 class="smaller lighter blue no-margin">商品选择</h3>
+          </div>
+
+          <div class="modal-body" style="overflow-y: scroll">
+            <table id="Goodtable" class="table table-hover" data-toggle="table"
+            data-click-to-select="true"
+            data-single-select="true"
+              style="white-space: nowrap">
+
+              <thead>
+                <tr>
+                  <th data-checkbox="true" name="fuxuanbox"
+                    class="brandcheckbox"></th>
+                  <th data-field="seriaNum"
+                    data-formatter="indexProductcategory" data-align="center">序号</th>
+                  <th data-field="name">商品名称</th>
+                  <th data-field="price" data-visible=true>商品价格</th>
+                  <th data-field="id" data-visible=true>商品编码</th>
+                  <th data-field="companyid" data-visible=true>卖家id</th>
+                </tr>
+              </thead>
+            </table>
+            <ul id='pageBar1'></ul>
+          </div>
+
+          <div class="modal-footer">
+
+            <button type="button" class="btn btn-primary"
+              id="chooseSureBtn">确定</button>
+            <button class="btn btn-sm btn-danger pull-right"
+              data-dismiss="modal">
+              <i class="ace-icon fa fa-times"></i> 关闭
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
 <script type="text/javascript" src="./js/jquery-3.2.1.js">
 </script>
 <script type="text/javascript" src="./js/bootstrap.js">
 </script>
 <script>
-  var d = new Date();
-  console.log(d.getDay());
+  $('#aaa').on('click',function(){
+    $('#good-model').modal('toggle')
+  })
 </script>
   </body>
 </html>
