@@ -41,3 +41,38 @@ from carbrand a inner join car_model_all b on a.nameoffactory = b.nameOfFactory 
 order by nameofbrand,nameOfFactory,nameofseries,chezudaima,year,descofgearbox
 ) d on c.brandid = d.brandid and c.nameofseries = d.nameofseries 
 order by seriesid,nameofmodel,year,chezudaima,nameOfSales,descOfGearBox 
+
+
+-- 
+-- TH00090_05  						制造商 T0000090_19
+select e.id,e.clientLinkMan,e.clientLinkTel,e.legalman,e.manageoperate,e.orgPhone,e.orgAddress,
+e.orgPrvince,e.orgCity,e.orgDistrict,e.orgName,e.orgId from 
+
+(
+select a.id,b.client_name clientLinkMan,b.client_phone clientLinkTel,c.legalman,c.manageoperate,c.org_phone orgPhone,c.org_address orgAddress,
+c.org_prvince orgPrvince,c.org_city orgCity,c.org_district orgDistrict,d.org_name orgName,c.org_id orgId from crm_organize a 
+inner join `crm_user_relation_company` b on a.id = b.company_id 
+inner join crm_manufacturerinfo c on b.client_orgId = c.org_id   left join crm_organize d on c.org_id = d.id 
+where a.erpOrgId = 'T0000090_05' 
+union all 
+select a.id,b.client_name clientLinkMan,b.client_phone clientLinkTel,c.legalman,c.manageoperate,c.org_phone orgPhone,c.org_address orgAddress,
+c.org_prvince orgPrvince,c.org_city orgCity,c.org_district orgDistrict,d.org_name orgName,c.org_id orgId from crm_organize a inner join `crm_user_relation_company` b on a.id = b.company_id 
+inner join crm_maintaininfo c on b.client_orgId = c.org_id  left join crm_organize d on c.org_id = d.id 
+where a.erpOrgId = 'T0000090_05' 
+union all 
+select a.id,b.client_name clientLinkMan,b.client_phone clientLinkTel,c.legalman,c.manageoperate,c.org_phone orgPhone,c.org_address orgAddress,
+c.org_prvince orgPrvince,c.org_city orgCity,c.org_district orgDistrict,d.org_name orgName,c.org_id orgId from crm_organize a inner join `crm_user_relation_company` b on a.id = b.company_id 
+inner join crm_agencyinfo c on b.client_orgId = c.org_id  left join crm_organize d on c.org_id = d.id 
+where a.erpOrgId = 'T0000090_05' 
+union all 
+select a.id,b.client_name clientLinkMan,b.client_phone clientLinkTel,c.legalman,c.manageoperate,c.org_phone orgPhone,c.org_address orgAddress,
+c.org_prvince orgPrvince,c.org_city orgCity,c.org_district orgDistrict,d.org_name orgName,c.org_id orgId from crm_organize a inner join `crm_user_relation_company` b on a.id = b.company_id 
+inner join crm_insuranceinfo c on b.client_orgId = c.org_id  left join crm_organize d on c.org_id = d.id 
+where a.erpOrgId = 'T0000090_05' 
+union all 
+select a.id,b.client_name clientLinkMan,b.client_phone clientLinkTel,c.legalman,c.manageoperate,c.org_phone orgPhone,c.org_address orgAddress,
+c.org_prvince orgPrvince,c.org_city orgCity,c.org_district orgDistrict,d.org_name orgName,c.org_id orgId from crm_organize a inner join `crm_user_relation_company` b on a.id = b.company_id 
+inner join crm_logisticsinfo c on b.client_orgId = c.org_id left join crm_organize d on c.org_id = d.id 
+where a.erpOrgId = 'T0000090_05' 
+) e where e.clientLinkTel like '%1%' 
+group by e.orgId 
